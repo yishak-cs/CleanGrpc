@@ -5,7 +5,7 @@ import (
 )
 
 type RepoInterface interface {
-	CreateUser(model.User) error
+	CreateUser(*model.User) (*model.User, error)
 
 	GetUsersList() []*model.User
 
@@ -13,11 +13,13 @@ type RepoInterface interface {
 
 	UpdateUser(*model.User) error
 
-	DeleteUser(id string) error
+	DeleteUser(string) error
+
+	GetUserByEmail(string) (*model.User, error)
 }
 
 type UseCaseInterface interface {
-	CreateUser(*model.User) error
+	CreateUser(*model.User) (*model.User, error)
 
 	GetUsersList() []*model.User
 

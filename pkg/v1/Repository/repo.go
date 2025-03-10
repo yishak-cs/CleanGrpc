@@ -15,12 +15,12 @@ func NewRepo(db gorm.DB) *Repo {
 	return &Repo{db}
 }
 
-func (repo *Repo) CreateUser(user model.User) error {
+func (repo *Repo) CreateUser(user *model.User) (*model.User, error) {
 	err := repo.db.Create(user).Error
 	if err != nil {
-		return fmt.Errorf("unable to create user: %w", err)
+		return &model.User{}, fmt.Errorf("unable to create user: %w", err)
 	}
-	return nil
+	return user, nil
 }
 
 func (repo *Repo) GetUser(id string) (*model.User, error) {
@@ -31,11 +31,11 @@ func (repo *Repo) GetUser(id string) (*model.User, error) {
 	return &user, nil
 }
 
-func (repo *Repo) GetUsersList() *[]model.User {
-	var users []model.User
+func (repo *Repo) GetUsersList() []*model.User {
+	var users []*model.User
 	resp := repo.db.Find(&users)
 	fmt.Printf("%d rows affected", resp.RowsAffected)
-	return &users
+	return users
 }
 
 func (repo *Repo) UpdateUser(data *model.User) error {
@@ -59,4 +59,12 @@ func (repo *Repo) DeleteUser(id string) error {
 	}
 
 	return nil
+}
+
+func (repo *Repo) GetUserByEmail(email string) (*model.User, error) {
+	var user model.User
+	if err := repo.db.Where("email=?", email).First(&user).Error; err != nil {
+		return &user, err
+	}
+	return &user, nil
 }
