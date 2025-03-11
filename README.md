@@ -20,7 +20,7 @@ The project follows a clean architecture pattern with three distinct layers:
    - Depends on abstractions (interfaces) rather than concrete implementations
    - Located in `pkg/v1/UseCase`
 
-3. **Presentation Layer (Handler)** - Handles external communication
+3. **Handler Layer** - Handles external communication
    - Implements the gRPC service interface
    - Transforms data between the domain model and the gRPC protocol buffers
    - Located in `pkg/v1/handler/grpc`
@@ -37,7 +37,7 @@ The project follows a clean architecture pattern with three distinct layers:
 
 ### Prerequisites
 
-- Go 1.16 or higher
+- Go 1.24
 - Git
 
 ### Installation
@@ -94,7 +94,7 @@ The client provides a command-line interface to interact with the service:
 
 ## Testing
 
-The project includes comprehensive tests for all layers of the architecture. The tests for the handler and use case layers were developed with assistance from Claude AI, demonstrating how AI can help create robust test suites.
+The project includes comprehensive tests for all layers of the architecture. The tests for the handler and use case layers were developed with assistance from Claude AI.
 
 ### Running Tests
 
@@ -108,7 +108,7 @@ go test ./pkg/v1/UseCase/test
 go test ./pkg/v1/handler/grpc/test
 ```
 
-### Test Structure
+### Test Structure 
 
 - **Repository Tests**: Unit tests that verify the repository layer's interaction with the database using an in-memory SQLite database.
 - **Use Case Tests**: Integration tests that verify the business logic using mocked repositories.
@@ -133,20 +133,4 @@ CleanGrpc/
 └── README.md           # Project documentation
 ```
 
-## Acknowledgements
 
-Special thanks to Claude AI for assistance in developing the comprehensive test suite for the handler and use case layers. The tests demonstrate best practices for testing gRPC services and clean architecture implementations in Go.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
