@@ -50,7 +50,7 @@ The project follows a clean architecture pattern with three distinct layers:
 
 2. Install dependencies:
    ```bash
-   go mod download
+   go mod tidy
    ```
 
 3. Build the project:
