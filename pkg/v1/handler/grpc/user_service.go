@@ -1,4 +1,4 @@
-package grpc
+package handler
 
 import (
 	"context"
@@ -17,7 +17,7 @@ type UserServiceServer struct {
 	pb.UnimplementedUserServiceServer
 }
 
-func NewServer(ser *grpc.Server, uc interfaces.UseCaseInterface) {
+func NewUserServer(ser *grpc.Server, uc interfaces.UseCaseInterface) {
 	//create an instance of UserServiceServer
 	server := UserServiceServer{usecase: uc}
 	//register a server which provides the stubs for clients

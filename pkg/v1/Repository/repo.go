@@ -4,14 +4,19 @@ import (
 	"fmt"
 
 	"github.com/yishak-cs/CleanGrpc/Internal/model"
+	interfaces "github.com/yishak-cs/CleanGrpc/pkg/v1"
 	"gorm.io/gorm"
 )
 
+// is responsible for interactiong with the database well not the database exactly
+// but gorm. its where actual data access is performed from datasource in ourcase
+// db
 type Repo struct {
-	db gorm.DB
+	db *gorm.DB
 }
 
-func NewRepo(db gorm.DB) *Repo {
+// constructor that returns a type the implements the repoInterface contract
+func NewRepo(db *gorm.DB) interfaces.RepoInterface {
 	return &Repo{db}
 }
 
@@ -39,7 +44,7 @@ func (repo *Repo) GetUsersList() []*model.User {
 }
 
 func (repo *Repo) UpdateUser(data *model.User) error {
-	user, err := repo.GetUser(string(data.ID))
+	user, err := repo.GetUser(fmt.Sprintf("%d", data.ID))
 	if err != nil {
 		return err
 	}
