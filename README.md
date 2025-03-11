@@ -77,19 +77,19 @@ The client provides a command-line interface to interact with the service:
 
 ```bash
 # Create a new user
-./client create "John Doe" "john@example.com"
+go run cmd/client/main.go create "John Doe" "john@example.com"
 
 # Get a user by ID
-./client get 1
+go run cmd/client/main.go get 1
 
 # List all users
-./client list
+go run cmd/client/main.go list
 
 # Update a user
-./client update 1 "John Updated" "john.updated@example.com"
+go run cmd/client/main.go update 1 "John Updated" "john.updated@example.com"
 
 # Delete a user
-./client delete 1
+go run cmd/client/main.go delete 1
 ```
 
 ## Testing
