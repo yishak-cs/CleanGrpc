@@ -69,7 +69,7 @@ func (repo *Repo) DeleteUser(id string) error {
 func (repo *Repo) GetUserByEmail(email string) (*model.User, error) {
 	var user model.User
 	if err := repo.db.Where("email=?", email).First(&user).Error; err != nil {
-		return &user, err
+		return &user, fmt.Errorf("failed to get user by email: %w", err)
 	}
 	return &user, nil
 }
